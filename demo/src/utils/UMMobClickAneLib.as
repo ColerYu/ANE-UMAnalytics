@@ -24,6 +24,7 @@ public class UMMobClickAneLib {
         // 8. [MobClick endLogPageView:@"PageOne"];
         // 9. [MobClick startSession:nil];
         // 10. [MobClick event:@"xxx"];
+        // 11. [MobClick  event:[NSString stringWithUTF8String:(const char *)chars] label:[NSString stringWithUTF8String:(const char *)chars2]];
         try{
             iOSUtilsCls = getDefinitionByName('ios.UMMobClickAne') as Class;
             inIOS =  iOSUtilsCls!= null;
@@ -34,7 +35,32 @@ public class UMMobClickAneLib {
             trace('ane.ios.UMMobClickAne not defined inIOS=',inIOS)        ;
         }
     }
+    /**
+     *    事件数量统计
+     * @param eventId
+     * @param label  当前事件的不同属性
+     * @param accumulation  自定义次数
+     */
+    public function eventWithLabelAndAccumulation(eventId:String,label:String,accumulation:uint):void{
+        if(inIOS)iOSUtils.UMMobClick_CallFun(14,eventId ,label,accumulation) ;
+    }
+    /**
+     *   事件数量统计
+     * @param eventId
+     * @param accumulation   自定义次数
+     */
+    public function eventWithAccumulation(eventId:String,accumulation:uint):void{
+        if(inIOS)iOSUtils.UMMobClick_CallFun(13,eventId ,accumulation) ;
+    }
 
+    /**
+     *   事件数量统计
+     * @param eventId
+     * @param label 当前事件的不同属性
+     */
+    public function eventWithLabel(eventId:String,label:String):void{
+        if(inIOS)iOSUtils.UMMobClick_CallFun(12,eventId ,label) ;
+    }
     /**
      * 设置appKey
      * @param key

@@ -30,6 +30,13 @@ public class UMAnalyticsDemo extends Sprite {
             // 测试
             // 事件统计
             UMMobClickAneLib.instance.event("playButtonClick");
+            UMMobClickAneLib.instance.eventWithAccumulation("playButtonClick",2);
+            // 统计当前事件的不同属性次数
+            UMMobClickAneLib.instance.eventWithLabel("player_dead","level"+1);
+            UMMobClickAneLib.instance.eventWithLabel("player_dead","level"+2);
+            // 统计当前事件的不同属性次数 自定义次数
+            UMMobClickAneLib.instance.eventWithLabelAndAccumulation("player_dead","level"+1,2);
+            UMMobClickAneLib.instance.eventWithLabelAndAccumulation("player_dead","level"+2,3);
             // 时长统计
             UMMobClickAneLib.instance.beginEvent("inPlay");
             setTimeout(function ():void {
