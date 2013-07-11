@@ -5,8 +5,8 @@
  */
 package {
 import flash.display.Sprite;
+import flash.system.Capabilities;
 import flash.utils.setTimeout;
-
 import utils.UMMobClickAneLib;
 
 public class UMAnalyticsDemo extends Sprite {
@@ -17,15 +17,47 @@ public class UMAnalyticsDemo extends Sprite {
          <extensionID>ane.ios.UMMobClickAne</extensionID>
          </extensions>
          */
-        setTimeout(function():void{
-            // 初始化
-            UMMobClickAneLib.instance.startWithAppkeyForDebugger("xxxxxx");  // debugger模式下有效使用了实时模式 REALTIME
 
-           // UMMobClickAneLib.instance.startWithAppkey("xxxxxxx");// 初始化
-           // UMMobClickAneLib.instance.startWithAppkeyAndChannelId("xxxxxx","xxxxx"); // 带渠道号的初始化
-            UMMobClickAneLib.instance.startSession();
+        var inAndroid:Boolean = Capabilities.manufacturer.toLowerCase().indexOf("android") != -1;
+        var inIOS:Boolean = Capabilities.manufacturer.toLowerCase().indexOf("ios") != -1;
 
-        },1000);
+        /**
+         * 在iOS上的初始化，
+         */
+        if(inIOS){
+
+            setTimeout(function():void{
+                // 初始化
+                UMMobClickAneLib.instance.startWithAppkeyForDebugger("xxxxxx");  // debugger模式下有效使用了实时模式 REALTIME
+
+                // UMMobClickAneLib.instance.startWithAppkey("xxxxxxx");// 初始化
+                // UMMobClickAneLib.instance.startWithAppkeyAndChannelId("xxxxxx","xxxxx"); // 带渠道号的初始化
+                UMMobClickAneLib.instance.startSession();
+
+            },1000);
+        }
+
+        /**
+         * 安卓上的初始化配置在  app.xml 里
+         *
+         *
+            <application android:enabled="true">
+                <activity android:excludeFromRecents="false">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN"/>
+                        <category android:name="android.intent.category.LAUNCHER"/>
+                    </intent-filter>
+                </activity>
+                <!-- 友盟 统计  开始-->
+                <meta-data android:value="51de6eb356240b3417008d7a" android:name="UMENG_APPKEY"></meta-data>
+                <!-- <meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>  -->
+            </application>
+            <uses-sdk android:minSdkVersion="10"></uses-sdk>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+            <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+            <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+            <!-- 友盟 统计 结束-->
+         */
         setTimeout(function():void{
             // 测试
             // 事件统计

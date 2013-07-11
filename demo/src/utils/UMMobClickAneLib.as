@@ -4,6 +4,7 @@
  * Time: 11:29 上午
  */
 package utils {
+import flash.events.Event;
 import flash.utils.getDefinitionByName;
 
 
@@ -24,7 +25,11 @@ public class UMMobClickAneLib {
         // 8. [MobClick endLogPageView:@"PageOne"];
         // 9. [MobClick startSession:nil];
         // 10. [MobClick event:@"xxx"];
-        // 11. [MobClick  event:[NSString stringWithUTF8String:(const char *)chars] label:[NSString stringWithUTF8String:(const char *)chars2]];
+        // 11.  [MobClick  event:[NSString stringWithUTF8String:(const char *)chars] label:[NSString stringWithUTF8String:(const char *)chars2]];
+
+        // 12  + (void)event:(NSString *)eventId label:(NSString *)label; // label为nil或@""时，等同于 event:eventId label:eventId;
+        // 13  + (void)event:(NSString *)eventId acc:(NSInteger)accumulation;
+        // 14  + (void)event:(NSString *)eventId label:(NSString *)label acc:(NSInteger)accumulation;
         try{
             iOSUtilsCls = getDefinitionByName('ios.UMMobClickAne') as Class;
             inIOS =  iOSUtilsCls!= null;
@@ -34,6 +39,30 @@ public class UMMobClickAneLib {
         }catch(e:*){
             trace('ane.ios.UMMobClickAne not defined inIOS=',inIOS)        ;
         }
+
+        try{
+
+            var NativeApplicationCls:Class = getDefinitionByName('flash.desktop.NativeApplication') as Class;
+            NativeApplicationCls.nativeApplication.addEventListener(
+                    Event.ACTIVATE,onActivate);
+
+            NativeApplicationCls.nativeApplication.addEventListener(
+                    Event.DEACTIVATE, onDeActivate);
+        }catch(e:*){
+
+        }
+        onResume();
+    }
+
+    private function onActivate(event:Event):void {
+
+        trace('onActivate');
+        onResume();
+    }
+
+    private function onDeActivate(event:Event):void {
+        trace('onDeActivate');
+        onPause();
     }
     /**
      *    事件数量统计
@@ -134,19 +163,22 @@ public class UMMobClickAneLib {
         if(inIOS)iOSUtils.UMMobClick_CallFun(9 ) ;
     }
 
-    /**
-     *  事件数量统计
-     * @param eventId
-     */
+
+    private function onResume():void{
+        if(inIOS)iOSUtils.UMMobClick_CallFun(16) ;
+    }
+    private function onPause():void{
+        if(inIOS)iOSUtils.UMMobClick_CallFun(17) ;
+    }
     public function event(eventId:String):void{
         if(inIOS)iOSUtils.UMMobClick_CallFun(10,eventId ) ;
     }
-
     public static function get instance():UMMobClickAneLib {
         if(_instance == null){
             _instance = new UMMobClickAneLib();
         }
         return _instance;
     }
+
 }
 }
