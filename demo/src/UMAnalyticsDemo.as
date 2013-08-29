@@ -94,7 +94,7 @@ public class UMAnalyticsDemo extends Sprite {
         })  ;
         btn.addEventListener(MouseEvent.CLICK, function(e:*):void{
             // 测试
-            // 事件统计
+            // 事件统计 
             trace('test');
             UMMobClickAneLib.instance.event("playButtonClick");
              UMMobClickAneLib.instance.eventWithAccumulation("playButtonClick",2);
