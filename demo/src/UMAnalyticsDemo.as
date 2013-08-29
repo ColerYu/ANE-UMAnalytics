@@ -29,9 +29,9 @@ public class UMAnalyticsDemo extends Sprite {
          */
         if(inIOS){
             // 初始化
-            UMMobClickAneLib.instance.startWithAppkeyForDebugger("521e8cec56240b75f003e377");  // debugger模式下有效使用了实时模式 REALTIME
+            //UMMobClickAneLib.instance.startWithAppkeyForDebugger("xxxxxxxxx");  // debugger模式下有效使用了实时模式 REALTIME
 
-            // UMMobClickAneLib.instance.startWithAppkey("xxxxxxx");// 初始化
+             UMMobClickAneLib.instance.startWithAppkey("xxxxxxxxx");// 初始化
             // UMMobClickAneLib.instance.startWithAppkeyAndChannelId("xxxxxx","xxxxx"); // 带渠道号的初始化
             UMMobClickAneLib.instance.startSession();
             trace('initSDK inIOS');
@@ -48,8 +48,9 @@ public class UMAnalyticsDemo extends Sprite {
              <category android:name="android.intent.category.LAUNCHER"/>
              </intent-filter>
              </activity>
-             <!-- 友盟 统计  开始-->
-             <meta-data android:value="51de6eb356240b3417008d7a" android:name="UMENG_APPKEY"></meta-data>
+             <!-- 友盟 统计   开始-->
+             <!-- set app key -->
+             <meta-data android:value="xxxxxxxxx" android:name="UMENG_APPKEY"></meta-data>
              <!-- <meta-data android:value="Channel ID" android:name="UMENG_CHANNEL"/>  -->
              </application>
              <uses-sdk android:minSdkVersion="10"></uses-sdk>
@@ -61,7 +62,7 @@ public class UMAnalyticsDemo extends Sprite {
 
 
 
-            UMMobClickAneLib.instance.startWithAppkeyForDebugger("51de6eb356240b3417008d7a");  // for Debugger Mode  MobClickAgent.setDebugMode( true );
+            //UMMobClickAneLib.instance.startWithAppkeyForDebugger("xxxxxxxxx");  // for Debugger Mode  MobClickAgent.setDebugMode( true );
             UMMobClickAneLib.instance.startSession();
             trace('initSDK inAndroid');
 
