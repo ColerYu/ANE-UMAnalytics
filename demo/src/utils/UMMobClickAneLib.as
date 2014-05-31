@@ -49,7 +49,7 @@ public class UMMobClickAneLib {
             NativeApplicationCls.nativeApplication.addEventListener(
                     Event.DEACTIVATE, onDeActivate);
         }catch(e:*){
-
+			trace('flash.desktop.NativeApplication == null ');
         }
         onResume();
     }
@@ -162,7 +162,15 @@ public class UMMobClickAneLib {
     public function startSession():void{
         if(inIOS)iOSUtils.UMMobClick_CallFun(9 ) ;
     }
+	
+	public function initFeedBack():void{
+		if(inIOS)iOSUtils.UMMobClick_CallFun(19 ) ;
+	}
 
+	
+	public function openFeedBack():void{
+		if(inIOS)iOSUtils.UMMobClick_CallFun(20) ;
+	}
 
     private function onResume():void{
         if(inIOS)iOSUtils.UMMobClick_CallFun(16) ;
@@ -173,6 +181,7 @@ public class UMMobClickAneLib {
     public function event(eventId:String):void{
         if(inIOS)iOSUtils.UMMobClick_CallFun(10,eventId ) ;
     }
+	
     public static function get instance():UMMobClickAneLib {
         if(_instance == null){
             _instance = new UMMobClickAneLib();
