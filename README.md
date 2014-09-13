@@ -15,3 +15,6 @@ Air Native Extension for UMAnalytics_Sdk_2.2.0.OpenUDID (iOS)
 ---------
 修复安卓兼容性问题
 安卓版本添加用户反馈功能 
+2014.9.13
+---------
+支持Android-x86
